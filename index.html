@@ -1,41 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bonkör</title>
+    <title>Gelişmiş E-Ticaret Sitesi</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
     <header>
-        <div class="container">
-            <p class="logo">
-            </p>
-            <nav>
-                <ul>
-                    <li><a href="#products">Ürünler</a></li>
-                    <li><a href="#about">Hakkımızda</a></li>
-                    <li><a href="#contact">İletişim</a></li>
-                </ul>
-            </nav>
+        <nav>
+            <div class="logo">E-Mağaza</div>
 
-        </div>
+            <!-- Arama Çubuğu -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Ürün ara...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="nav-items">
+                <a href="#" class="active">Ana Sayfa</a>
+                <a href="#">Ürünler</a>
+                <a href="#">Hakkımızda</a>
+                <a href="#">İletişim</a>
+            </div>
+
+            <div class="cart" id="cartIcon">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cartCount">0</span>
+            </div>
+        </nav>
     </header>
 
-    <section id="hero">
-        <div class="container">
-            <h2>En Kaliteli Ürünler</h2>
-            <p>Bu sezonun en iyi ürünlerini kaçırmayın!</p>
-            <a href="ürünler.html" class="btn">Şimdi Alışverişe Başla</a>
+    <!-- Kategori ve Filtreleme Menüsü -->
+    <div class="category-filter">
+        <div class="categories">
+            <h3>Kategoriler</h3>
+            <ul>
+                <li><a href="#" data-category="all" class="active">Tümü</a></li>
+                <li><a href="#" data-category="electronics">Elektronik</a></li>
+                <li><a href="#" data-category="clothing">Giyim</a></li>
+                <li><a href="#" data-category="books">Kitaplar</a></li>
+            </ul>
         </div>
-    </section>
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Mağazam. Tüm Hakları Saklıdır.</p>
+
+        <div class="filters">
+            <h3>Filtreler</h3>
+            <div class="price-filter">
+                <label>Fiyat Aralığı:</label>
+                <input type="range" id="priceRange" min="0" max="1000" value="1000">
+                <span id="priceValue">1000₺</span>
+            </div>
+            <div class="sort-filter">
+                <label>Sıralama:</label>
+                <select id="sortSelect">
+                    <option value="default">Varsayılan</option>
+                    <option value="price-low">Fiyat (Düşük-Yüksek)</option>
+                    <option value="price-high">Fiyat (Yüksek-Düşük)</option>
+                    <option value="name">İsme Göre</option>
+                </select>
+            </div>
         </div>
-    </footer>
+    </div>
+
+    <!-- Ana Bölüm -->
+    <main>
+        <div class="products-container" id="productsContainer">
+            <!-- Ürünler JavaScript ile dinamik olarak eklenecek -->
+        </div>
+    </main>
+
+    <!-- Sepet Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <h2>Sepetim <span class="close-cart">&times;</span></h2>
+            <div class="cart-items" id="cartItems">
+                <!-- Sepet öğeleri JavaScript ile eklenecek -->
+            </div>
+            <div class="cart-total">
+                <h3>Toplam: <span id="cartTotal">0.00₺</span></h3>
+                <button class="checkout-btn">Ödemeye Geç</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

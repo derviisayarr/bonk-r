@@ -1,77 +1,148 @@
-// Sepet Verileri
+// Örnek ürün verileri
+const products = [
+    {
+        id: 1,
+        name: "Akıllı Telefon",
+        price: 4999.99,
+        category: "electronics",
+        image: "https://via.placeholder.com/300",
+        description: "Son model akıllı telefon"
+    },
+    {
+        id: 2,
+        name: "Laptop",
+        price: 7999.99,
+        category: "electronics",
+        image: "https://via.placeholder.com/300",
+        description: "Güçlü performanslı laptop"
+    },
+    // Daha fazla ürün eklenebilir
+];
+
 let cart = [];
-let totalPrice = 0;
+let currentCategory = 'all';
+let currentSort = 'default';
+let maxPrice = 1000;
 
-// Sepete Ürün Ekle
-function addToCart(productName, productPrice) {
-    // Sepet Verilerini Al
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+// DOM Elements
+const productsContainer = document.getElementById('productsContainer');
+const cartModal = document.getElementById('cartModal');
+const cartItems = document.getElementById('cartItems');
+const cartCount = document.getElementById('cartCount');
+const cartTotal = document.getElementById('cartTotal');
+const searchInput = document.getElementById('searchInput');
+const priceRange = document.getElementById('priceRange');
+const priceValue = document.getElementById('priceValue');
+const sortSelect = document.getElementById('sortSelect');
 
-    // Yeni Ürünü Sepete Ekle
-    cart.push({ name: productName, price: productPrice });
-
-    // Güncellenmiş Sepeti localStorage'e Kaydet
-    localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-
-// Sepeti Güncelle
-function updateCartUI() {
-    const cartList = document.getElementById('cart-list');
-    const totalPriceElement = document.getElementById('total-price');
-
-    // Sepet Listesini Temizle
-    cartList.innerHTML = '';
-
-    // Sepeti Doldur
-    cart.forEach((item) => {
-        const li = document.createElement('li');
-        li.textContent = `${item.name} - ₺${item.price}`;
-        cartList.appendChild(li);
+// Ürünleri görüntüleme fonksiyonu
+function displayProducts() {
+    const filteredProducts = products.filter(product => {
+        const matchesCategory = currentCategory === 'all' || product.category === currentCategory;
+        const matchesPrice = product.price <= maxPrice;
+        const matchesSearch = product.name.toLowerCase().includes(searchInput.value.toLowerCase());
+        return matchesCategory && matchesPrice && matchesSearch;
     });
 
-    // Toplam Fiyatı Güncelle
-    totalPriceElement.textContent = `Toplam: ₺${totalPrice}`;
+    // Sıralama
+    const sortedProducts = [...filteredProducts].sort((a, b) => {
+        switch (currentSort) {
+            case 'price-low':
+                return a.price - b.price;
+            case 'price-high':
+                return b.price - a.price;
+            case 'name':
+                return a.name.localeCompare(b.name);
+            default:
+                return 0;
+        }
+    });
+
+    productsContainer.innerHTML = sortedProducts.map(product => `
+        <div class="product-card">
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}">
+            </div>
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p class="price">${product.price.toFixed(2)} ₺</p>
+                <p class="description">${product.description}</p>
+                <button class="add-to-cart" onclick="addToCart(${product.id})">Sepete Ekle</button>
+            </div>
+        </div>
+    `).join('');
 }
-document.addEventListener("DOMContentLoaded", () => {
-    if (document.getElementById('cart-list')) {
-        updateCartUI();
+
+// Sepete ürün ekleme
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    const existingItem = cart.find(item => item.id === productId);
+
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        cart.push({ ...product, quantity: 1 });
     }
-});
-function loadCart() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartList = document.getElementById('cart-list');
-    const totalPriceElement = document.getElementById('total-price');
 
-    let totalPrice = 0;
-    cartList.innerHTML = '';
-
-    cart.forEach((item) => {
-        const li = document.createElement('li');
-        li.textContent = `${item.name} - ₺${item.price}`;
-        cartList.appendChild(li);
-        totalPrice += item.price;
-    });
-
-    totalPriceElement.textContent = `Toplam: ₺${totalPrice}`;
+    updateCart();
 }
 
-// Sayfa Yüklendiğinde Sepeti Yükle
-document.addEventListener("DOMContentLoaded", loadCart);
+// Sepeti güncelleme
+function updateCart() {
+    cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
 
-// Sepeti onayla butonuna tıklama olayını dinleyelim
-document.getElementById('confirm-btn').addEventListener('click', function () {
-    // Sepet elemanlarını temizle
-    document.getElementById('cart-list').innerHTML = '';
+    cartItems.innerHTML = cart.map(item => `
+        <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p>${item.price.toFixed(2)} ₺ x ${item.quantity}</p>
+            </div>
+            <span class="remove-item" onclick="removeFromCart(${item.id})">&times;</span>
+        </div>
+    `).join('');
 
-    // Toplam fiyatı sıfırla
-    document.getElementById('total-price').textContent = 'Toplam: ₺0';
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    cartTotal.textContent = `${total.toFixed(2)}₺`;
+}
 
-    // Onay mesajını göster
-    document.getElementById('confirmation-message').style.display = 'block';
+// Sepetten ürün çıkarma
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCart();
+}
 
-    // 3 saniye sonra onay mesajını gizle
-    setTimeout(function () {
-        document.getElementById('confirmation-message').style.display = 'none';
-    }, 3000);
+// Event Listeners
+document.getElementById('cartIcon').addEventListener('click', () => {
+    cartModal.style.display = 'block';
 });
+
+document.querySelector('.close-cart').addEventListener('click', () => {
+    cartModal.style.display = 'none';
+});
+
+searchInput.addEventListener('input', displayProducts);
+
+priceRange.addEventListener('input', (e) => {
+    maxPrice = Number(e.target.value);
+    priceValue.textContent = `${maxPrice}₺`;
+    displayProducts();
+});
+
+sortSelect.addEventListener('change', (e) => {
+    currentSort = e.target.value;
+    displayProducts();
+});
+
+document.querySelectorAll('.categories a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('.categories a.active').classList.remove('active');
+        e.target.classList.add('active');
+        currentCategory = e.target.dataset.category;
+        displayProducts();
+    });
+});
+
+// Sayfa yüklendiğinde ürünleri göster
+displayProducts();
