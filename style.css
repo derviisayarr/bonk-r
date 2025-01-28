@@ -81,3 +81,37 @@ footer {
     text-align: center;
     padding: 1rem 0;
 }
+
+#cart {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#cart-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#cart-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#confirm-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#confirm-btn:hover {
+    background-color: #45a049;
+}
+
+#confirmation-message {
+    font-size: 16px;
+    margin-top: 20px;
+    color: green;
+}

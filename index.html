@@ -11,18 +11,16 @@
 <body>
     <header>
         <div class="container">
-            <div class="row">
-                <p class="logo"><img src="img/bonkör.jpeg" style="width: 150px; height: 150px; border-radius: 25px;">
-                <h1>MAĞAZAMIZA HOŞGELDİNİZ...</h1>
-                </p>
-                <nav>
-                    <ul>
-                        <li><a href="#products">Ürünler</a></li>
-                        <li><a href="#about">Hakkımızda</a></li>
-                        <li><a href="#contact">İletişim</a></li>
-                    </ul>
-                </nav>
-            </div>
+            <p class="logo">
+            </p>
+            <nav>
+                <ul>
+                    <li><a href="#products">Ürünler</a></li>
+                    <li><a href="#about">Hakkımızda</a></li>
+                    <li><a href="#contact">İletişim</a></li>
+                </ul>
+            </nav>
+
         </div>
     </header>
 
@@ -30,41 +28,9 @@
         <div class="container">
             <h2>En Kaliteli Ürünler</h2>
             <p>Bu sezonun en iyi ürünlerini kaçırmayın!</p>
-            <a href="#products" class="btn">Şimdi Alışverişe Başla</a>
+            <a href="ürünler.html" class="btn">Şimdi Alışverişe Başla</a>
         </div>
     </section>
-
-    <section id="products" class="container">
-        <h2>Ürünlerimiz</h2>
-        <div class="product-grid">
-            <!-- Ürün Kartları -->
-            <div class="product-card">
-                <img src="img/ayakkabı1.jpeg" alt="Ürün 1">
-                <h3>Ürün 1</h3>
-                <p>₺100</p>
-                <button onclick="addToCart('Ürün 1', 100)">Sepete Ekle</button>
-            </div>
-            <div class="product-card">
-                <img src="img/ayakkabı2.jpeg" alt="Ürün 2">
-                <h3>Ürün 2</h3>
-                <p>₺200</p>
-                <button onclick="addToCart('Ürün 2', 200)">Sepete Ekle</button>
-            </div>
-            <div class="product-card">
-                <img src="img/ayakkabı3.jpeg" alt="Ürün 3">
-                <h3>Ürün 3</h3>
-                <p>₺300</p>
-                <button onclick="addToCart('Ürün 3', 300)">Sepete Ekle</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="cart" class="container">
-        <h2>Alışveriş Sepeti</h2>
-        <ul id="cart-list"></ul>
-        <p id="total-price">Toplam: ₺0</p>
-    </section>
-
     <footer>
         <div class="container">
             <p>&copy; 2025 Mağazam. Tüm Hakları Saklıdır.</p>
