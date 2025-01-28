@@ -20,7 +20,15 @@
                 <button><i class="fas fa-search"></i></button>
             </div>
 
-            <div class="nav-items">
+            <!-- Hamburger Menü -->
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <!-- Nav Items -->
+            <div class="nav-items" id="navItems">
                 <a href="#" class="active">Ana Sayfa</a>
                 <a href="#">Ürünler</a>
                 <a href="#">Hakkımızda</a>
@@ -33,6 +41,55 @@
             </div>
         </nav>
     </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Yeni Sezon Ürünleri</h1>
+            <p>En yeni ürünlerimizi keşfedin</p>
+            <a href="#products" class="cta-button">Alışverişe Başla</a>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Öne Çıkan Kategoriler -->
+    <section class="featured-categories">
+        <h2>Popüler Kategoriler</h2>
+        <div class="category-cards">
+            <div class="category-card">
+                <img src="https://via.placeholder.com/400x300" alt="Elektronik">
+                <h3>Elektronik</h3>
+                <a href="#" class="category-link">Keşfet</a>
+            </div>
+            <div class="category-card">
+                <img src="https://via.placeholder.com/400x300" alt="Giyim">
+                <h3>Giyim</h3>
+                <a href="#" class="category-link">Keşfet</a>
+            </div>
+            <div class="category-card">
+                <img src="https://via.placeholder.com/400x300" alt="Kitaplar">
+                <h3>Kitaplar</h3>
+                <a href="#" class="category-link">Keşfet</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Öne Çıkan Ürünler -->
+    <section class="featured-products">
+        <h2>Öne Çıkan Ürünler</h2>
+        <div class="products-slider" id="featuredProducts">
+            <!-- Ürünler JavaScript ile eklenecek -->
+        </div>
+    </section>
+
+    <!-- Kampanya Banner -->
+    <section class="promo-banner">
+        <div class="promo-content">
+            <h2>Özel İndirim!</h2>
+            <p>İlk alışverişinize özel %20 indirim</p>
+            <a href="#" class="promo-button">KAMPANYA20</a>
+        </div>
+    </section>
 
     <!-- Kategori ve Filtreleme Menüsü -->
     <div class="category-filter">
