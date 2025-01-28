@@ -203,14 +203,12 @@ nav {
 }
 
 .cart-modal.active {
-    display: block;
     opacity: 1;
 }
 
 .cart-content {
     position: absolute;
     right: -400px;
-    /* Başlangıçta ekran dışında */
     top: 0;
     width: 400px;
     height: 100%;
@@ -218,12 +216,10 @@ nav {
     padding: 2rem;
     overflow-y: auto;
     transition: right 0.3s ease;
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .cart-modal.active .cart-content {
     right: 0;
-    /* Aktif olduğunda sağdan içeri kayar */
 }
 
 .close-cart {

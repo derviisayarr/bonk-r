@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürünlerimiz - E-Mağaza</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="urunler.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">E-Mağaza</div>
+
+            <div class="nav-items">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="urunler.html" class="active">Ürünler</a>
+                <a href="#">Hakkımızda</a>
+                <a href="#">İletişim</a>
+            </div>
+
+            <div class="search-cart-group">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Ürün ara...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+
+                <div class="cart" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Ürünler Sayfası Ana İçerik -->
+    <div class="products-page">
+        <!-- Filtreler Sidebar -->
+        <aside class="filters-sidebar">
+            <div class="filter-section">
+                <h3>Kategoriler</h3>
+                <div class="filter-options">
+                    <label><input type="checkbox" value="elektronik"> Elektronik</label>
+                    <label><input type="checkbox" value="giyim"> Giyim</label>
+                    <label><input type="checkbox" value="kitap"> Kitap</label>
+                    <label><input type="checkbox" value="aksesuar"> Aksesuar</label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Fiyat Aralığı</h3>
+                <div class="price-slider">
+                    <div class="price-inputs">
+                        <div class="price-input">
+                            <span>Min</span>
+                            <input type="number" id="minPrice" value="0" min="0" max="5000">
+                            <span>₺</span>
+                        </div>
+                        <div class="price-input">
+                            <span>Max</span>
+                            <input type="number" id="maxPrice" value="5000" min="0" max="5000">
+                            <span>₺</span>
+                        </div>
+                    </div>
+                    <div class="slider">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="range-input">
+                        <input type="range" class="range-min" min="0" max="5000" value="0" step="100">
+                        <input type="range" class="range-max" min="0" max="5000" value="5000" step="100">
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Değerlendirme</h3>
+                <div class="filter-options">
+                    <label><input type="checkbox" value="5"> ⭐⭐⭐⭐⭐</label>
+                    <label><input type="checkbox" value="4"> ⭐⭐⭐⭐</label>
+                    <label><input type="checkbox" value="3"> ⭐⭐⭐</label>
+                </div>
+            </div>
+
+            <button class="apply-filters">Filtreleri Uygula</button>
+        </aside>
+
+        <!-- Ürünler Ana Bölüm -->
+        <main class="products-main">
+            <!-- Üst Bar -->
+            <div class="products-top-bar">
+                <div class="results-count">
+                    48 ürün bulundu
+                </div>
+                <div class="sort-options">
+                    <select id="sortSelect">
+                        <option value="popular">En Popüler</option>
+                        <option value="new">En Yeni</option>
+                        <option value="price-low">Fiyat: Düşükten Yükseğe</option>
+                        <option value="price-high">Fiyat: Yüksekten Düşüğe</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Ürün Grid -->
+            <div class="products-grid">
+                <!-- Ürün Kartı 1 -->
+                <div class="product-card">
+                    <div class="product-badge">Yeni</div>
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/300" alt="Ürün 1">
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                            <button class="action-btn"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Elektronik</div>
+                        <h3>Akıllı Saat Pro</h3>
+                        <div class="product-rating">
+                            ⭐⭐⭐⭐⭐ <span>(128)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">1299₺</span>
+                            <span class="original-price">1499₺</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ürün Kartı 2 -->
+                <div class="product-card">
+                    <div class="product-badge sale">İndirim</div>
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/300" alt="Ürün 2">
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                            <button class="action-btn"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Giyim</div>
+                        <h3>Premium Deri Ceket</h3>
+                        <div class="product-rating">
+                            ⭐⭐⭐⭐ <span>(85)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">899₺</span>
+                            <span class="original-price">1199₺</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diğer ürün kartları benzer şekilde eklenebilir -->
+            </div>
+
+            <!-- Sayfalama -->
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">4</button>
+                <button class="page-btn">→</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Sepet Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <h2>Sepetim <span class="close-cart">&times;</span></h2>
+            <div class="cart-items" id="cartItems">
+                <!-- Sepet öğeleri JavaScript ile eklenecek -->
+            </div>
+            <div class="cart-total">
+                <h3>Toplam: <span id="cartTotal">0.00₺</span></h3>
+                <button class="checkout-btn">Ödemeye Geç</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

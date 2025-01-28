@@ -114,22 +114,40 @@ function removeFromCart(productId) {
 
 // Event Listeners
 const cartIcon = document.getElementById('cartIcon');
+const closeCart = document.querySelector('.close-cart');
 
+// Sepeti aç
 cartIcon.addEventListener('click', () => {
-    cartModal.classList.add('active');
+    cartModal.style.display = 'block';
+    // Kısa bir gecikme ile opacity'yi ayarla (display: block'un işlenmesi için)
+    setTimeout(() => {
+        cartModal.classList.add('active');
+    }, 10);
 });
 
-// Sepeti dışarı tıklayınca kapatma
+// Sepeti kapatma fonksiyonu
+const closeCartModal = () => {
+    cartModal.classList.remove('active');
+    // Opacity animasyonunun tamamlanmasını bekle
+    setTimeout(() => {
+        cartModal.style.display = 'none';
+    }, 300); // Bu süre CSS'teki transition süresiyle eşleşmeli
+};
+
+// Sepeti kapat (çarpı işareti ile)
+closeCart.addEventListener('click', closeCartModal);
+
+// Sepeti kapat (dışarı tıklama ile)
 cartModal.addEventListener('click', (e) => {
     if (e.target === cartModal) {
-        cartModal.classList.remove('active');
+        closeCartModal();
     }
 });
 
-// ESC tuşu ile kapatma
+// Sepeti kapat (ESC tuşu ile)
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && cartModal.classList.contains('active')) {
-        cartModal.classList.remove('active');
+        closeCartModal();
     }
 });
 
@@ -153,6 +171,83 @@ document.querySelectorAll('.categories a').forEach(link => {
         e.target.classList.add('active');
         currentCategory = e.target.dataset.category;
         displayProducts();
+    });
+});
+
+// Fiyat aralığı sürgüsü için kod
+document.addEventListener('DOMContentLoaded', function () {
+    const rangeInput = document.querySelectorAll(".range-input input");
+    const priceInput = document.querySelectorAll(".price-input input");
+    const progress = document.querySelector(".slider .progress");
+    const priceGap = 500; // Minimum fiyat farkı
+
+    // Başlangıç değerlerini ayarla
+    progress.style.left = "0%";
+    progress.style.right = "0%";
+
+    // Fiyat input'larını güncelleme fonksiyonu
+    const updatePriceInputs = (minVal, maxVal) => {
+        priceInput[0].value = minVal;
+        priceInput[1].value = maxVal;
+    };
+
+    // Progress bar'ı güncelleme fonksiyonu
+    const updateProgress = (minVal, maxVal) => {
+        const minPercent = (minVal / rangeInput[0].max) * 100;
+        const maxPercent = 100 - (maxVal / rangeInput[1].max) * 100;
+        progress.style.left = minPercent + "%";
+        progress.style.right = maxPercent + "%";
+    };
+
+    // Range input'ları için event listener
+    rangeInput.forEach(input => {
+        input.addEventListener("input", e => {
+            let minVal = parseInt(rangeInput[0].value);
+            let maxVal = parseInt(rangeInput[1].value);
+
+            if (maxVal - minVal < priceGap) {
+                if (e.target.className === "range-min") {
+                    minVal = maxVal - priceGap;
+                    rangeInput[0].value = minVal;
+                } else {
+                    maxVal = minVal + priceGap;
+                    rangeInput[1].value = maxVal;
+                }
+            }
+
+            updatePriceInputs(minVal, maxVal);
+            updateProgress(minVal, maxVal);
+        });
+    });
+
+    // Fiyat input'ları için event listener
+    priceInput.forEach(input => {
+        input.addEventListener("input", e => {
+            let minVal = parseInt(priceInput[0].value);
+            let maxVal = parseInt(priceInput[1].value);
+
+            // Değer kontrolü
+            if (minVal < 0) minVal = 0;
+            if (maxVal > 5000) maxVal = 5000;
+            if (minVal > maxVal - priceGap) {
+                if (e.target.id === "minPrice") {
+                    minVal = maxVal - priceGap;
+                } else {
+                    maxVal = minVal + priceGap;
+                }
+            }
+
+            // Input değerlerini güncelle
+            priceInput[0].value = minVal;
+            priceInput[1].value = maxVal;
+
+            // Range değerlerini güncelle
+            rangeInput[0].value = minVal;
+            rangeInput[1].value = maxVal;
+
+            // Progress bar'ı güncelle
+            updateProgress(minVal, maxVal);
+        });
     });
 });
 
