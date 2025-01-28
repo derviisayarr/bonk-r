@@ -116,6 +116,17 @@ footer {
     color: green;
 }
 
+/* Header ve Nav düzeni */
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
 /* Arama Çubuğu Stili */
 .search-bar {
     display: flex;
@@ -123,15 +134,18 @@ footer {
     background: #f5f5f5;
     border-radius: 25px;
     padding: 5px 15px;
-    flex: 0 1 400px;
+    width: 300px;
+    /* Sabit genişlik */
+    margin-right: 1rem;
 }
 
 .search-bar input {
     border: none;
     background: none;
     padding: 8px;
-    flex: 1;
+    width: 100%;
     outline: none;
+    font-size: 0.9rem;
 }
 
 .search-bar button {
@@ -139,45 +153,39 @@ footer {
     background: none;
     cursor: pointer;
     color: #666;
+    padding: 0 5px;
 }
 
-/* Kategori ve Filtreleme Menüsü */
-.category-filter {
-    max-width: 1200px;
-    margin: 1rem auto;
-    padding: 1rem;
+/* Sepet ve Arama Grubu */
+.search-cart-group {
     display: flex;
-    gap: 2rem;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    gap: 1rem;
 }
 
-.categories ul {
-    list-style: none;
-    padding: 0;
+/* Sepet Stili */
+.cart {
+    position: relative;
+    cursor: pointer;
+    padding: 0.5rem;
 }
 
-.categories a {
-    text-decoration: none;
-    color: #333;
-    padding: 5px 0;
-    display: block;
-    transition: color 0.3s;
+.cart i {
+    font-size: 1.2rem;
+    color: #2c3e50;
 }
 
-.categories a:hover,
-.categories a.active {
-    color: #007bff;
-}
-
-.filters {
-    flex: 1;
-}
-
-.price-filter,
-.sort-filter {
-    margin: 1rem 0;
+.cart span {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    min-width: 18px;
+    text-align: center;
 }
 
 /* Sepet Modal Stili */
@@ -190,17 +198,32 @@ footer {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cart-modal.active {
+    display: block;
+    opacity: 1;
 }
 
 .cart-content {
     position: absolute;
-    right: 0;
+    right: -400px;
+    /* Başlangıçta ekran dışında */
     top: 0;
     width: 400px;
     height: 100%;
     background: white;
     padding: 2rem;
     overflow-y: auto;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart-modal.active .cart-content {
+    right: 0;
+    /* Aktif olduğunda sağdan içeri kayar */
 }
 
 .close-cart {
@@ -251,18 +274,22 @@ footer {
     background: #218838;
 }
 
-/* Responsive Tasarım Güncellemeleri */
+/* Responsive düzenlemeler */
 @media (max-width: 768px) {
-    .category-filter {
-        flex-direction: column;
+    nav {
+        flex-wrap: wrap;
     }
 
-    .cart-content {
+    .search-cart-group {
+        order: 2;
         width: 100%;
+        justify-content: space-between;
+        margin-top: 1rem;
     }
 
     .search-bar {
-        display: none;
+        width: calc(100% - 60px);
+        /* Sepet için yer bırak */
     }
 }
 
@@ -473,12 +500,14 @@ footer {
 
 .nav-items a {
     text-decoration: none;
-    color: #333;
+    color: #2c3e50;
+    /* Koyu mavi-gri tonu */
     font-weight: 500;
     font-size: 1.1rem;
     padding: 0.5rem 1rem;
     position: relative;
     transition: color 0.3s ease;
+    letter-spacing: 0.5px;
 }
 
 /* Hover efekti - Alt çizgi animasyonu */
@@ -489,9 +518,15 @@ footer {
     height: 2px;
     bottom: 0;
     left: 50%;
-    background-color: #007bff;
+    background-color: #3498db;
+    /* Mavi ton */
     transition: all 0.3s ease;
     transform: translateX(-50%);
+}
+
+.nav-items a:hover {
+    color: #3498db;
+    /* Mavi ton */
 }
 
 .nav-items a:hover::after {
@@ -500,16 +535,15 @@ footer {
 
 /* Aktif link stili */
 .nav-items a.active {
-    color: #007bff;
+    color: #3498db;
+    /* Mavi ton */
+    font-weight: 600;
 }
 
 .nav-items a.active::after {
     width: 100%;
-}
-
-/* Hover durumunda yazı rengi değişimi */
-.nav-items a:hover {
-    color: #007bff;
+    background-color: #3498db;
+    /* Mavi ton */
 }
 
 /* Mobil menü için hamburger icon */

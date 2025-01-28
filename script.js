@@ -113,12 +113,24 @@ function removeFromCart(productId) {
 }
 
 // Event Listeners
-document.getElementById('cartIcon').addEventListener('click', () => {
-    cartModal.style.display = 'block';
+const cartIcon = document.getElementById('cartIcon');
+
+cartIcon.addEventListener('click', () => {
+    cartModal.classList.add('active');
 });
 
-document.querySelector('.close-cart').addEventListener('click', () => {
-    cartModal.style.display = 'none';
+// Sepeti dışarı tıklayınca kapatma
+cartModal.addEventListener('click', (e) => {
+    if (e.target === cartModal) {
+        cartModal.classList.remove('active');
+    }
+});
+
+// ESC tuşu ile kapatma
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && cartModal.classList.contains('active')) {
+        cartModal.classList.remove('active');
+    }
 });
 
 searchInput.addEventListener('input', displayProducts);
