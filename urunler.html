@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ürünlerimiz - E-Mağaza</title>
+    <title>Ürünler - Modern E-Ticaret Sitesi</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="urunler.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -27,6 +27,11 @@
                 <div class="search-bar">
                     <input type="text" id="searchInput" placeholder="Ürün ara...">
                     <button><i class="fas fa-search"></i></button>
+                </div>
+
+                <div class="favorites" id="favoritesIcon">
+                    <i class="fas fa-heart"></i>
+                    <span id="favoritesCount">0</span>
                 </div>
 
                 <div class="cart" id="cartIcon">
@@ -111,7 +116,7 @@
                 <div class="product-card">
                     <div class="product-badge">Yeni</div>
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/300" alt="Ürün 1">
+                        <img src="img/akıllısaat.jpeg" alt="Ürün 1">
                         <div class="product-actions">
                             <button class="action-btn"><i class="fas fa-heart"></i></button>
                             <button class="action-btn add-to-cart"><i class="fas fa-shopping-cart"></i></button>
@@ -135,11 +140,12 @@
                 <div class="product-card">
                     <div class="product-badge sale">İndirim</div>
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/300" alt="Ürün 2">
+                        <img src="img/dericeket.jpeg" alt="Ürün 2">
                         <div class="product-actions">
                             <button class="action-btn"><i class="fas fa-heart"></i></button>
                             <button class="action-btn add-to-cart"><i class="fas fa-shopping-cart"></i></button>
                             <button class="action-btn"><i class="fas fa-search"></i></button>
+
                         </div>
                     </div>
                     <div class="product-info">
@@ -179,6 +185,16 @@
             <div class="cart-total">
                 <h3>Toplam: <span id="cartTotal">0.00₺</span></h3>
                 <button class="checkout-btn">Ödemeye Geç</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favoriler Modal -->
+    <div class="favorites-modal" id="favoritesModal">
+        <div class="favorites-content">
+            <h2>Favorilerim <span class="close-favorites">&times;</span></h2>
+            <div class="favorites-items" id="favoritesItems">
+                <!-- Favori öğeleri JavaScript ile eklenecek -->
             </div>
         </div>
     </div>

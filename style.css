@@ -168,11 +168,20 @@ nav {
     position: relative;
     cursor: pointer;
     padding: 0.5rem;
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
 }
 
 .cart i {
-    font-size: 1.2rem;
-    color: #2c3e50;
+    font-size: 1.5rem;
+    color: #007bff;
 }
 
 .cart span {
@@ -295,14 +304,38 @@ nav {
 .hero {
     position: relative;
     height: 80vh;
-    background: url('https://via.placeholder.com/1920x1080') no-repeat center center;
-    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
     margin-bottom: 4rem;
+    overflow: hidden;
+}
+
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
 }
 
 .hero-overlay {
@@ -312,11 +345,12 @@ nav {
     width: 100%;
     height: 100%;
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     max-width: 800px;
     padding: 2rem;
 }
@@ -434,13 +468,19 @@ nav {
     gap: 2rem;
 }
 
-/* Kampanya Banner */
+/* Promo banner stilleri */
 .promo-banner {
     background: linear-gradient(45deg, #007bff, #00ff88);
-    padding: 4rem 2rem;
+    padding: 3rem;
     text-align: center;
     color: white;
-    margin: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-content {
+    position: relative;
+    z-index: 2;
 }
 
 .promo-content h2 {
@@ -461,11 +501,56 @@ nav {
     text-decoration: none;
     border-radius: 30px;
     font-weight: bold;
-    transition: transform 0.3s ease;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .promo-button:hover {
-    transform: scale(1.1);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Animasyon efektleri */
+.promo-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.promo-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Parıltı efekti */
+@keyframes sparkle {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.sparkle {
+    position: absolute;
+    pointer-events: none;
+    background: white;
+    border-radius: 50%;
+    animation: sparkle 0.8s ease-in-out forwards;
 }
 
 /* Responsive Tasarım */
@@ -593,4 +678,208 @@ nav {
     .nav-items a:hover {
         background-color: #f5f5f5;
     }
+}
+
+/* Favoriler ve Sepet simge stilleri */
+.favorites,
+.cart {
+    position: relative;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+}
+
+.favorites i,
+.cart i {
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+.favorites:hover,
+.cart:hover {
+    background: rgba(0, 123, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.favorites:hover i,
+.cart:hover i {
+    color: #0056b3;
+}
+
+/* Sayaç stilleri */
+#favoritesCount,
+#cartCount {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4444;
+    color: white;
+    font-size: 0.8rem;
+    padding: 2px 6px;
+    border-radius: 50%;
+    min-width: 18px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Favoriler Modal */
+.favorites-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.favorites-modal.active {
+    opacity: 1;
+}
+
+.favorites-content {
+    position: absolute;
+    right: -400px;
+    top: 0;
+    width: 400px;
+    height: 100%;
+    background: white;
+    padding: 2rem;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.favorites-modal.active .favorites-content {
+    right: 0;
+}
+
+.close-favorites {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.close-favorites:hover {
+    color: #ff4444;
+}
+
+/* Favoriler içeriği stilleri */
+.favorites-items {
+    margin: 2rem 0;
+}
+
+@media (max-width: 480px) {
+    .favorites-content {
+        width: 100%;
+    }
+}
+
+/* Custom Select Stilleri */
+.sort-options {
+    margin: 20px 0;
+}
+
+.custom-select {
+    position: relative;
+    width: 250px;
+    font-family: Arial, sans-serif;
+}
+
+.select-trigger {
+    padding: 10px 15px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.options-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 0 0 5px 5px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.custom-select.active .options-list {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+.option {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: #f5f5f5;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ok ikonu animasyonu */
+.select-trigger i {
+    transition: transform 0.3s ease;
+}
+
+.custom-select.active .select-trigger i {
+    transform: rotate(180deg);
+}
+
+/* Select menüsü stilleri */
+.sort-options select {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.sort-options select:hover {
+    border-color: #007bff;
+}
+
+.sort-options select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
